@@ -2,6 +2,7 @@
 
 int main()
 {
-	std::cout<<h.currentDateTime()<<std::endl;
+	Hora* h = Hora::getHora();
+	std::cout<<h->printFechaHora()<<std::endl;
 	return 0;
 }

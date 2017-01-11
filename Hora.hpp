@@ -8,10 +8,10 @@ class Hora
 
 private: 
 	time_t tiempo;
+	static Hora* instancia;
+	Hora();
 
 public: 
-	Hora();
-	const std::string currentDateTime(); 
+	static Hora* getHora();
+	const std::string printFechaHora(); 
 };
-
-extern Hora h;

@@ -1,19 +1,24 @@
 #include "Hora.hpp"
 
-
-Hora h;
+Hora* Hora::instancia = 0;
 
 Hora::Hora()
 {
+	instancia = this;
 }
 
-const std::string Hora::currentDateTime()
+const std::string  Hora::printFechaHora()
 {
-	time_t     tiempo = time(0);
-    struct tm  tstruct;
-    char       buf[80];
+	time_t tiempo = time(0);
+	struct tm  tstruct;
+    char buf[80];
     tstruct = *localtime(&tiempo);
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
-
+    strftime(buf, sizeof(buf), "%r", &tstruct);
     return buf;
+}
+
+Hora* Hora::getHora()
+{
+	static Hora instancia;
+	return &instancia;
 }
