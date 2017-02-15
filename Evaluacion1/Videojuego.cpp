@@ -23,6 +23,13 @@
 	void Videojuego::Produccion(){}
 	void Videojuego::Pruebas(){}
 
+	bool Videojuego::operator < (const Videojuego &otro) const
+	{
+		if (precio < otro.precio)
+		    return true;
+		return false;
+	}
+
 	void VidEstrategia::Concepcion()
 	{
 		cout<<"Concepcion Videojuego de Estrategia"<<endl;

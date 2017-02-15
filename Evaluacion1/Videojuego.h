@@ -27,6 +27,8 @@ public:
 	virtual void Planificacion();
 	virtual void Produccion();
 	virtual void Pruebas();
+	bool operator < (const Videojuego &otro) const;
+
 
 	template<class Genero>
     static Videojuego* factoryMethod()

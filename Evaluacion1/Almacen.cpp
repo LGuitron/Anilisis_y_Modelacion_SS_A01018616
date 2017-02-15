@@ -1,13 +1,15 @@
 #include "Almacen.h"
 
 
+
 Almacen* Almacen::instancia = nullptr;
 unsigned Almacen::nuevoIDvideoJuego = 1;
+
 
 	Almacen::Almacen(){}
 
 	//Almacen se crea con singleton//
-	Almacen* Almacen::crearInventario(unsigned _tamanio)
+	Almacen* Almacen::crearInventario()
 	{
 		if(instancia==nullptr)
 		{
@@ -28,7 +30,10 @@ unsigned Almacen::nuevoIDvideoJuego = 1;
 		for(unsigned i=0; i<lista.size(); i++)
 		{
 			if(numSerie==lista[i].getNumSerie())
+			{
+				operacionesEliminar.push(lista[i]);		//Agrega videojuego eliminado al stack//
 				lista.erase(lista.begin() + i);
+			}
 		}
 	}
 	void Almacen::eliminarVideojuego(string nombre)
@@ -36,8 +41,13 @@ unsigned Almacen::nuevoIDvideoJuego = 1;
 		for(unsigned i=0; i<lista.size(); i++)
 		{
 			if(nombre==lista[i].getNombre())
+			{
+				operacionesEliminar.push(lista[i]);		//Agrega videojuego eliminado al stack//
 				lista.erase(lista.begin() + i);
+			}
 		}
+
+
 	}
 
 	Videojuego Almacen::buscarVideojuego(unsigned numSerie)
@@ -64,9 +74,26 @@ unsigned Almacen::nuevoIDvideoJuego = 1;
 		return v;
 	}
 
+	void Almacen::ordenar(bool menorAmayor)
+	{
+		sort(lista.begin(),lista.end());  //Ordena de menor a mayor
+		if(!menorAmayor)				  //Cambia el orden de mayor a menor
+			reverse(lista.begin(),lista.end()); 
+
+	}
+
 	void Almacen::rehacer()
 	{
-		cout<<"Rehacer"<<endl;
+		for(int i = 0; i<3; i++)
+		{
+			if(operacionesEliminar.size()>0)
+			{
+				lista.push_back(operacionesEliminar.top());
+				operacionesEliminar.pop();
+			}
+			else
+				break;
+		}
 	}
 	unsigned Almacen::getNumElementos()
 	{
@@ -76,7 +103,7 @@ unsigned Almacen::nuevoIDvideoJuego = 1;
 	{
 		for(unsigned i=0; i<lista.size(); i++)
 		{
-			cout<<lista[i].getNombre()<<" "<<lista[i].getEstudio()<<" "<<lista[i].getNumSerie()<<" "<<lista[i].getEstrellas()<<" "<<lista[i].getPrecio();
+			cout<<lista[i].getNombre()<<" "<<lista[i].getEstudio()<<" "<<lista[i].getNumSerie()<<" "<<lista[i].getEstrellas()<<" "<<lista[i].getPrecio()<<endl;
 		}
 		cout<<endl;
 	}

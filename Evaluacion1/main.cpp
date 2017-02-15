@@ -1,32 +1,20 @@
-#include "Almacen.h"
+#include "Menu.h"
 
 int main()
 {
 
+	//Menu para funciones del almacen//
+	Menu menu;
+
+	//PROTOTYPE videojuegos//
 	Videojuego* v = new Videojuego(12345,"Skyrim", "Bethesda", 999.0f , 5.0f);
 	Videojuego* vv = v->clonar();
 
+	//FACTORY METHOD videojuegos//
 	Videojuego* vEst = Videojuego::factoryMethod<VidEstrategia>();
 
-	Almacen* almacen = Almacen::crearInventario(10);
-	almacen->agregarVideojuego("Skyrim", "Bethesda", 999.0f , 5.0f);
-	almacen->imprimirElementos();
-
-	cout<<"Cantidad de juegos: "<<almacen->getNumElementos()<<endl;
-
-
-
-	Videojuego v1 = almacen->buscarVideojuego("Skyrim");
-	cout<<"Resultado busqueda: "<<v1.getNombre()<<endl;
-
-	Videojuego v2 = almacen->buscarVideojuego("a");
-	cout<<"Resultado busqueda: "<<v2.getNombre()<<endl;
-
-	almacen->eliminarVideojuego("Skyrim");
-
-
-
-
+	//SINGLETON almacen//	
+	Almacen* almacen = Almacen::crearInventario();
 
 	return 0;
 }
