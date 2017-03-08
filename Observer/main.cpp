@@ -1,6 +1,7 @@
 #include "PenaNieto.h"
 #include "Donald.h"
 #include "Reforma.h"
+#include "Televisa.h"
 
 int main()
 {
@@ -8,8 +9,10 @@ int main()
 	Donald don("Donald Trump");
 
 	Reforma reforma("Reforma");
-
+	Televisa tel("Televisa");
+	
 	pena.agregarObservador(&reforma);
+	pena.agregarObservador(&tel);
 	don.agregarObservador(&reforma);
 
 	pena.setEstado("copete");
