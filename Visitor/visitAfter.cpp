@@ -113,8 +113,6 @@ int main()
 	Visitor* c = Visitor::getInstance<CountVisitor>();
     Visitor* a = Visitor::getInstance<AddVisitor>();
     Visitor* p = Visitor::getInstance<PresentVisitor>();
-
-    
     Number* n[] ={new Integer, new Double};
     
 
@@ -133,4 +131,5 @@ int main()
     cout << endl;
     n[1]->accept(p);
     n[1]->accept(c);
+    cout<<endl;
 }
