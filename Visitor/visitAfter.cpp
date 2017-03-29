@@ -4,19 +4,18 @@ using namespace std;
 
 class Integer;
 class Double;
-class PresentVisitor;
 
 class Visitor
 {
-
 public:
 
-	template<class T>
-    static T* getInstance()
+		template<class T>
+		static T* getInstance()
     {
         static T instance;
         return &instance;
     }
+
 
 
     virtual void visit(Integer*) = 0;
@@ -62,6 +61,9 @@ int Double::countDouble = 0;
 class PresentVisitor : public Visitor
 {
 
+private:
+	PresentVisitor(){}
+
 public:
     void visit(Integer* i)
     {
@@ -71,9 +73,13 @@ public:
     {
         cout << d->getQuienSoy();
     }
+		friend class Visitor;
 };
+
 class CountVisitor : public Visitor
 {
+private:
+	CountVisitor(){}
 public:
     void visit(Integer* i)
     {
@@ -83,10 +89,13 @@ public:
     {
         cout << Double::countDouble;
     }
+		friend class Visitor;
 };
 
 class AddVisitor : public Visitor
 {
+private:
+	AddVisitor(){}
 public:
     void visit(Integer*)
     {
@@ -96,6 +105,7 @@ public:
     {
         Double::countDouble++;
     }
+		friend class Visitor;
 };
 
 void Double::accept(Visitor* v)
@@ -110,26 +120,38 @@ void Integer::accept(Visitor* v)
 
 int main()
 {
-	Visitor* c = Visitor::getInstance<CountVisitor>();
+		Visitor* c = Visitor::getInstance<CountVisitor>();
     Visitor* a = Visitor::getInstance<AddVisitor>();
     Visitor* p = Visitor::getInstance<PresentVisitor>();
-    Number* n[] ={new Integer, new Double};
-    
+<<<<<<< HEAD
+=======
 
+>>>>>>> db9018e7f2d366f4453235187b2776495ba9e581
+    Number* n[] ={new Integer, new Double};
 
     for(int i=0; i< 5; i++)
     {
-        for (int j = 0; j < 2; j++) 
+        for (int j = 0; j < 2; j++)
         {
-            n[j]->accept(a); 
+            n[j]->accept(a);
         }
     }
-    
 
     n[0]->accept(p);
     n[0]->accept(c);
     cout << endl;
     n[1]->accept(p);
     n[1]->accept(c);
+<<<<<<< HEAD
     cout<<endl;
 }
+=======
+		cout << endl;
+
+		delete p;
+		delete c;
+		delete a;
+		delete n[1];
+		delete n[0];
+}
+>>>>>>> db9018e7f2d366f4453235187b2776495ba9e581
